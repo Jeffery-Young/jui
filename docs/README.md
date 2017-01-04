@@ -14,7 +14,7 @@
 
 ## Quick Start
 
-Hello Jui~
+Hello Jui
 
 描述如何使用Jui。
 
