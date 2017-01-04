@@ -1,0 +1,19 @@
+{
+  "name": "jui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jeffery-Young/jui.git"
+  },
+  "author": "Jeffery",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jeffery-Young/jui/issues"
+  },
+  "homepage": "https://github.com/Jeffery-Young/jui#readme"
+}
