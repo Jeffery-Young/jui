@@ -70,7 +70,7 @@
                 if (hash.length > 0) {
                     renderUI(hash); 
                 } else {
-                    $.get('./readme.md', function(doc) {
+                    $.get('../readme.md', function(doc) {
                         $('#con-doc').html(marked(doc));
                     });
                 }
