@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="cn">
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <title>Jui</title>
     <!-- mardown css -->
     <link media="all" rel="stylesheet" href="./assets/markdown/style/default.css" type="text/css">
@@ -12,35 +12,31 @@
 </head>
 
 <body>
-    <div id="header">
-        <div id="logo"><a href="../">Jui</a></div>
-        <!-- <div id="download"><a href="../output/pmd.tar.gz">Download PMD</a></div> -->
+    <div class="header">
+        <div class="logo"><a href="./">Jui</a></div>
+        <!-- <div class="download"><a href="../output/pmd.tar.gz">Download PMD</a></div> -->
     </div>
 
-    <div id="container">
+    <div class="container">
         <!-- 左侧菜单 -->
-        <div id="con-menu">
+        <div class="con-menu">
             <ul><!-- 导航 file:build/components/menu.html --></ul>
         </div>
         <!-- 右侧示例 -->
-        <div id="con-example">
-            <div id="device">
-                <div id="device-content">
-                    <iframe id="demo_container" width="324" height="575" frameborder="0"></iframe>
-                </div>
-                <div id="demo-link">
-                    <div id="demo-qrcode"></div>
-                    <a href="#" target="_blank">新窗口打开示例</a>
-                </div>
+        <div class="con-example">
+            <iframe class="con-demo-container" frameborder="0"></iframe>
+            <div class="con-demo-link">
+                <div class="con-demo-qrcode"></div>
+                <a href="#" target="_blank">新窗口打开示例</a>
             </div>
         </div>
         <!-- mardown文档 -->
-        <div id="con-doc" class="markdown-body">
+        <div class="con-doc" class="markdown-body">
             <!-- markdown文档内容 -->
         </div>
     </div>
 
-    <!-- <div id="footer">
+    <!-- <div class="footer">
         <p>&copy; 2016 Baidu PSFE - <a href="http://gitlab.baidu.com/groups/psfe" target="_blank">GitLab</a></p>
         <p><a href="http://sfe.baidu.com/" target="_blank">PSDoc</a> / <a href="http://speedup.baidu.com/" target="_blank">SpeedUp</a> / <a href="http://webb.baidu.com/" target="_blank">Webb</a></p>
     </div> -->
@@ -52,9 +48,9 @@
     <script type="text/javascript">
         $(function($) {
             // 加载导航html
-            $('#con-menu ul').load('../build/components/menu.html', function() {
+            $('.con-menu ul').load('../build/components/menu.html', function() {
                 // 导航点击
-                $('#con-menu li').each(function() {
+                $('.con-menu li').each(function() {
                     var $this = $(this);
                     var uiType = $this.attr('data-type');
                     $this.on('click', function() {
@@ -71,7 +67,7 @@
                     renderUI(hash); 
                 } else {
                     $.get('./README.md', function(doc) {
-                        $('#con-doc').html(marked(doc));
+                        $('.con-doc').html(marked(doc));
                     });
                 }
             }
@@ -80,9 +76,9 @@
                 var url = '../build/components/' + type + '/readme.md';
                 //set demo src
                 var iframeUrl = '../build/components/' + type + '/demo.html';
-                $('#demo_container').attr('src', iframeUrl);
-                $('#demo-link a').attr('href', iframeUrl);
-                $('#demo-qrcode').empty().qrcode({
+                $('.con-demo-container').attr('src', iframeUrl);
+                $('.con-demo-link a').attr('href', iframeUrl);
+                $('.con-demo-qrcode').empty().qrcode({
                     width: 300,
                     height: 300,
                     text: location.href.replace(location.hash, '') + iframeUrl
@@ -96,7 +92,7 @@
                     cache: false,
                     success: function (doc) {
                         scrollTo(0, 0);
-                        $('#con-doc').html(marked(doc)).css({
+                        $('.con-doc').html(marked(doc)).css({
                             'position': 'relative',
                             'left': '-50px',
                             'opacity': '0'
@@ -110,31 +106,31 @@
                         var doc = [];
                         doc.push('# 组件未找到');
                         doc.push('> 如有问题请联系 yangfan16@baidu.com');
-                        $('#con-doc').html(marked(doc.join('\n')));
+                        $('.con-doc').html(marked(doc.join('\n')));
                     }
                 });
 
                 // 切换导航hover状态
-                $('#con-menu').find('.selected').removeClass('selected');
-                $('#con-menu').find('li[data-type="' + type + '"]').addClass('selected');
+                $('.con-menu').find('.selected').removeClass('selected');
+                $('.con-menu').find('li[data-type="' + type + '"]').addClass('selected');
             }
 
             // 如果demo中iframe出现滚动条，则demo中滚动时阻止父页面滚动
-            $('#demo_container').load(function() {
-                if ($('#demo_container').contents().find('body').height() > $('#demo_container').height()) {
-                    $('#device-content').on('mousewheel', function(e) {
+            $('.con-demo-container').load(function() {
+                if ($('.con-demo-container').contents().find('body').height() > $('.con-demo-container').height()) {
+                    $('.con-demo-container').on('mousewheel', function(e) {
                         e.preventDefault();
                     });
                 } else {
-                    $('#device-content').off('mousewheel');
+                    $('.con-demo-container').off('mousewheel');
                 };
             });
             
             // 处理demo二维码显示隐藏
-            $('#demo-link a').on('mouseover', function() {
-                $('#demo-qrcode').show();
+            $('.con-demo-link a').on('mouseover', function() {
+                $('.con-demo-qrcode').show();
             }).on('mouseout', function() {
-                $('#demo-qrcode').hide();
+                $('.con-demo-qrcode').hide();
             });
 
 
@@ -162,25 +158,26 @@
             // demo&menu浮动
             $(window).on('scroll', function(){
                 if (pageYOffset > 80) {
-                    $('#header').css({
+                    $('.header').css({
                         'top': '-64px'
                     });
-                    $('#con-menu ul').css({
+                    $('.con-menu ul').css({
                         'margin-top': '10px'
                     });
-                    $('#device').css({
+                    $('.con-example').css({
                         'position': 'fixed',
                         'top': $(window).height() < 870 ? '-85px' : '15px'
                     });
                 } else {
-                    $('#header').css({
+                    $('.header').css({
                         'top': '0'
                     });
-                    $('#con-menu ul').css({
+                    $('.con-menu ul').css({
                         'margin-top': '80px'
                     });
-                    $('#device').css({
-                        'position': 'static'
+                    $('.con-example').css({
+                        'position': 'absolute',
+                        'top': 'auto'
                     });
                 };
             });
